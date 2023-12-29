@@ -1,0 +1,20 @@
+@echo off
+SETLOCAL ENABLEDELAYEDEXPANSION
+set /A num=0
+FOR /L %%i IN (1,1,1000) do (
+    IF NOT "%%i"=="%~n0%~x0" (
+        set /A num+=1
+        if !num! LSS 10 (
+            COPY test.txt test00!num!%%~xi.txt
+        ) ELSE (
+            if !num! LSS 100 (
+                COPY test.txt test0!num!%%~xi.txt
+            ) ELSE (
+                COPY test.txt test!num!%%~xi.txt
+            )
+        )
+    )
+)
+ENDLOCAL
+
+pushd
